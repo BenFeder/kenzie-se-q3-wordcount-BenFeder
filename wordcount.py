@@ -25,23 +25,50 @@ should return a dictionary with words as keys, and their counts as values.
 
 # Your name, plus anyone who helped you with this assignment
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "Benjamin Feder"
 
 import sys
 
 
 def create_word_dict(filename):
     """Returns a word/count dict for the given file."""
-    # Your code here
-    return
+    with open(filename, "r") as book:
+        words_dict = dict()
+
+        for line in book:
+            line = line.lower()
+            words = line.split()
+
+            for word in words:
+
+                if word in words_dict:
+                    words_dict[word] += 1
+                else:
+                    words_dict[word] = 1
+
+        return words_dict
 
 
 def print_words(filename):
     """Prints one per line '<word> : <count>', sorted
     by word for the given file.
     """
-    # Your code here
-    return
+    with open(filename, "r") as book:
+        words_dict = dict()
+
+        for line in book:
+            line = line.lower()
+            words = line.split()
+
+            for word in words:
+
+                if word in words_dict:
+                    words_dict[word] += 1
+                else:
+                    words_dict[word] = 1
+
+        for key_words in sorted(words_dict.keys()):
+            print(key_words)
 
 
 def print_top(filename):
