@@ -25,7 +25,7 @@ should return a dictionary with words as keys, and their counts as values.
 
 # Your name, plus anyone who helped you with this assignment
 # Give credit where credit is due.
-__author__ = "Benjamin Feder"
+__author__ = "Benjamin Feder, https://stackabuse.com/"
 
 import sys
 
@@ -73,12 +73,37 @@ def print_words(filename):
 
 def print_top(filename):
     """Prints the top count listing for the given file."""
-    # Your code here
-    return
+    with open(filename, "r") as book:
+        words_dict = dict()
 
+        for line in book:
+            line = line.lower()
+            words = line.split()
+
+            for word in words:
+
+                if word in words_dict:
+                    words_dict[word] += 1
+                else:
+                    words_dict[word] = 1
+
+        sorted_values = sorted(words_dict.values())
+        sorted_dict = dict()
+
+        for val in sorted_values:
+            for key in words_dict.keys():
+                if words_dict[key] == val:
+                    sorted_dict[key] = words_dict[key]
+
+        sorted_list = list(sorted_dict.items())[-1:-21:-1]
+
+        for key, val in sorted_list:
+            print({key: val})
 
 # This basic command line argument parsing code is provided and calls
 # the print_words() and print_top() functions which you must implement.
+
+
 def main(args):
     if len(args) != 2:
         print('usage: python wordcount.py {--count | --topcount} file')
